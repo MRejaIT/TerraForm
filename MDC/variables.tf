@@ -20,8 +20,8 @@ variable "mdc_plans_list" {
 variable "subplans" {
   type = map(string)
   default = {
-    "VirtualMachines" : "P2"
-    "Api" : "P1"
+    "VirtualMachines" : "VM02"
+    "Api" : "P2"
     "Arm" : "PerSubscription"
     "KeyVaults" : "PerKeyVault"
   }
