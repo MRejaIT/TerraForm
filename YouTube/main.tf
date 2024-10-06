@@ -18,7 +18,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "TerraForm-RG-SEA-02"
+  name     = "TerraForm-RG-SEA-01"
   location = "Southeast Asia"
   
   tags = {
@@ -26,3 +26,4 @@ resource "azurerm_resource_group" "rg" {
     Environment = "Production"
   }
 }
+
