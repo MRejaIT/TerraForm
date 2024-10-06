@@ -1,0 +1,4 @@
+Application ID	: 0fd8a585-8613-46fd-8833-2d64838e4938
+Tenant ID		: 479e29ce-1a7a-4ee2-88c6-f4c3370ab5a1
+value			: OV_8Q~kttYWQhB2V7qd8C4w6LfNvDYKFMRje~aeV
+Secret ID		: 1dce606f-5ebb-4d98-9195-15bb2ad94a3d
