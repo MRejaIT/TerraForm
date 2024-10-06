@@ -27,3 +27,15 @@ resource "azurerm_resource_group" "rg" {
   }
 }
 
+resource "azurerm_storage_account" "storage" {
+  name                     = "shourav1432007"
+  resource_group_name      = "TerraForm-RG-SEA-01"
+  location                 = "Southeast Asia"
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+  account_kind             = "StorageV2" 
+
+  tags = {
+    environment = "staging"
+  }
+}
