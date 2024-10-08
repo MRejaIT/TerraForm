@@ -28,7 +28,7 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_storage_account" "storage" {
-  name                     = "shourav1432007"
+  name                     = "shourav143200733"
   resource_group_name      = "TerraForm-RG-SEA-01"
   location                 = "Southeast Asia"
   account_tier             = "Standard"
@@ -38,4 +38,18 @@ resource "azurerm_storage_account" "storage" {
   tags = {
     environment = "staging"
   }
+}
+
+resource "azurerm_storage_container" "container" {
+  name                  = "data"
+  storage_account_name  = "shourav143200733"
+  container_access_type = "private"
+}
+
+resource "azurerm_storage_blob" "example" {
+  name                   = "sample.txt"
+  storage_account_name   = "shourav143200733"
+  storage_container_name = "data"
+  type                   = "Block"
+  source                 = "sample.txt"
 }
