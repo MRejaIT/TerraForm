@@ -34,7 +34,7 @@ locals {
 
         {
             name="DB-Subnet"
-            address_prefixes="10.0.1.0/24"
+            address_prefixes="10.0.2.0/24"
         }
 
     ]
@@ -61,7 +61,7 @@ resource "azurerm_subnet" "appsubnet" {
   virtual_network_name = local.vitrual_network.name
   address_prefixes     = [local.subnet[0].address_prefixes]
 
-  depends_on = [ azurerm_resource_group.rgdetails ]
+  depends_on = [ azurerm_virtual_network.vnet ]
 }
 
 resource "azurerm_subnet" "dbsubnet" {
@@ -70,5 +70,5 @@ resource "azurerm_subnet" "dbsubnet" {
   virtual_network_name = local.vitrual_network.name
   address_prefixes     = [local.subnet[1].address_prefixes]
 
-  depends_on = [ azurerm_resource_group.rgdetails]
+  depends_on = [ azurerm_virtual_network.vnet]
 }
