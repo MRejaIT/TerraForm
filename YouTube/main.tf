@@ -20,6 +20,7 @@ provider "azurerm" {
 locals {
   azurerm_resource_group = "TerraForm-RG-SEA-01"
   location = "Southeast Asia"
+  storage_account_name = "shourav143200733123"
 }
 
 resource "azurerm_resource_group" "rg" {
@@ -33,7 +34,7 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_storage_account" "storageaccount" {
-  name                     = "shourav1432007331"
+  name                     = local.storage_account_name
   resource_group_name      = local.azurerm_resource_group
   location                 = local.location
   account_tier             = "Standard"
@@ -49,7 +50,7 @@ resource "azurerm_storage_account" "storageaccount" {
 
 resource "azurerm_storage_container" "container" {
   name                  = "data"
-  storage_account_name  = "shourav143200733"
+  storage_account_name  = local.storage_account_name
   container_access_type = "private"
 
   depends_on = [ azurerm_storage_account.storageaccount ]
@@ -57,7 +58,7 @@ resource "azurerm_storage_container" "container" {
 
 resource "azurerm_storage_blob" "blob" {
   name                   = "sample.txt"
-  storage_account_name   = "shourav143200733"
+  storage_account_name   = local.storage_account_name
   storage_container_name = "data"
   type                   = "Block"
   source                 = "sample.txt"
