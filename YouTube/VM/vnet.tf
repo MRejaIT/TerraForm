@@ -28,7 +28,7 @@ resource "azurerm_resource_group" "rg" {
   
 }
 
-resource "azurerm_virtual_network" "example" {
+resource "azurerm_virtual_network" "vnet" {
   name                = "VNet-01"
   location            = local.location
   resource_group_name = local.azurerm_resource_group
@@ -45,4 +45,17 @@ resource "azurerm_virtual_network" "example" {
     address_prefixes = ["10.0.2.0/24"]
   }
   depends_on = [ azurerm_resource_group.rg ]
+}
+
+resource "azurerm_network_interface" "nic" {
+  name                = "nic0001"
+  location            = local.location
+  resource_group_name = local.azurerm_resource_group
+
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_virtual_network.vnet.id
+    private_ip_address_allocation = "Dynamic"
+  }
+  depends_on = [azurerm_virtual_network.vnet]
 }

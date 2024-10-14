@@ -72,3 +72,32 @@ resource "azurerm_subnet" "dbsubnet" {
 
   depends_on = [ azurerm_virtual_network.vnet]
 }
+
+resource "azurerm_network_interface" "nic" {
+  name                = "nic0001"
+  location            = local.location
+  resource_group_name = local.azurerm_resource_group
+
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.appsubnet.id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.pip.id
+  }
+  depends_on = [ azurerm_subnet.appsubnet ]
+}
+
+output "appsubnet-id" {
+  value = azurerm_subnet.appsubnet.id
+  
+}
+
+resource "azurerm_public_ip" "pip" {
+  name                = "appsrv-pip"
+  resource_group_name = local.azurerm_resource_group
+  location            = local.location
+  allocation_method   = "Static"
+
+  depends_on = [ azurerm_resource_group.rgdetails ]
+
+}
