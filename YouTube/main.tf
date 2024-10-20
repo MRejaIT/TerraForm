@@ -108,3 +108,21 @@ resource "azurerm_windows_virtual_machine" "win-vm" {
   }
   depends_on = [ azurerm_resource_group.rgdetails, azurerm_network_interface.nic ]
 }
+
+resource "azurerm_managed_disk" "datadisk" {
+  name                 = "datadisk01"
+  location             = local.location
+  resource_group_name  = local.azurerm_resource_group
+  storage_account_type = "Standard_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = 4
+
+  depends_on = [ azurerm_resource_group.rgdetails ]
+}
+
+resource "azurerm_virtual_machine_data_disk_attachment" "datadisklink" {
+  managed_disk_id    = azurerm_managed_disk.datadisk.id
+  virtual_machine_id = azurerm_windows_virtual_machine.win-vm.id
+  lun                = "0"
+  caching            = "ReadWrite"
+}
