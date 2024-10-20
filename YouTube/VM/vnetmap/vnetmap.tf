@@ -126,3 +126,27 @@ resource "azurerm_subnet_network_security_group_association" "nsglink" {
   network_security_group_id = azurerm_network_security_group.nsgdetails.id
 }
 
+resource "azurerm_windows_virtual_machine" "win-vm" {
+  name                = "FTVM"
+  resource_group_name = local.azurerm_resource_group
+  location            = local.location
+  size                = "Standard_B2als_v2"
+  admin_username      = "azuser"
+  admin_password      = "Asdf123456789"
+  network_interface_ids = [
+    azurerm_network_interface.nic.id,
+  ]
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
+  source_image_reference {
+    publisher = "MicrosoftWindowsServer"
+    offer     = "WindowsServer"
+    sku       = "2022-Datacenter"
+    version   = "latest"
+  }
+  depends_on = [ azurerm_resource_group.rgdetails, azurerm_network_interface.nic ]
+}
