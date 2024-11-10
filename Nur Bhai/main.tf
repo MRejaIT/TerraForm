@@ -69,7 +69,7 @@ resource "azurerm_network_interface" "tf_nIC" {
 }
 
 resource "azurerm_subnet_network_security_group_association" "nsglink" {
-  subnet_id                 = azurerm_subnet.appsubnet.id
+  subnet_id                 = azurerm_subnet.AppSubnet.id
   network_security_group_id = azurerm_network_security_group.nsgdetails.id
 }
 
